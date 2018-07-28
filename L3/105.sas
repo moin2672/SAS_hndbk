@@ -1,0 +1,11 @@
+* Group observations by cost;
+DATA homeimprovements;
+INFILE 'C:\Users\448513\Documents\My SAS Files\9.1\L2\Home.dat';
+INPUT Owner $ 1-7 Description $ 9-33 Cost;
+IF Cost = . THEN CostGroup = 'missing';
+ELSE IF Cost < 2000 THEN CostGroup = 'low';
+ELSE IF Cost < 10000 THEN CostGroup = 'medium';
+ELSE CostGroup = 'high';
+PROC PRINT DATA = homeimprovements;
+TITLE 'Home Improvement Cost Groups';
+RUN;
